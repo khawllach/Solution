@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Topbar from "../Layouts/Topbar";
 import Ai from "../Ai/Ai";
@@ -99,8 +100,17 @@ function riskMeta(risk: RiskFlag) {
 }
 
 export default function PendingRequestsPage() {
+  const navigate = useNavigate();
   const [highRiskOnly, setHighRiskOnly] = useState(false);
   const [selected, setSelected] = useState<Record<string, boolean>>({});
+
+  const handleExport = () => {
+    alert("Exporting data to CSV...");
+  };
+
+  const handleNewBooking = () => {
+    navigate("/carrier/control");
+  };
 
   const rows = useMemo(() => {
     if (!highRiskOnly) return mockRows;
@@ -132,10 +142,10 @@ export default function PendingRequestsPage() {
           </div>
 
           <div className="prqHeaderActions">
-            <button className="prqBtn prqBtnGhost">
+            <button className="prqBtn prqBtnGhost" onClick={handleExport}>
               <span className="prqBtnIcon">⬇</span> Export CSV
             </button>
-            <button className="prqBtn prqBtnPrimary">
+            <button className="prqBtn prqBtnPrimary" onClick={handleNewBooking}>
               <span className="prqBtnIcon">＋</span> New Booking
             </button>
           </div>
@@ -177,10 +187,18 @@ export default function PendingRequestsPage() {
               Showing 1-{rows.length} of {rows.length}
             </span>
             <div className="prqPagerMini">
-              <button className="prqIconBtn" type="button">
+              <button
+                className="prqIconBtn"
+                type="button"
+                onClick={() => alert("Previous page")}
+              >
                 ‹
               </button>
-              <button className="prqIconBtn" type="button">
+              <button
+                className="prqIconBtn"
+                type="button"
+                onClick={() => alert("Next page")}
+              >
                 ›
               </button>
             </div>

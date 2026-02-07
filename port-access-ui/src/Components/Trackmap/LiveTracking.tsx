@@ -1,7 +1,11 @@
 // src/components/Tracking/LiveTracking.tsx
-import React from "react";
+import React, { useState } from "react";
 
 const LiveTracking: React.FC = () => {
+  const [zoom, setZoom] = useState(1);
+  const handleZoomIn = () => setZoom((prev) => Math.min(prev + 0.2, 2));
+  const handleZoomOut = () => setZoom((prev) => Math.max(prev - 0.2, 0.6));
+
   return (
     <div className="min-h-screen text-[#e7eef8] py-7 px-7">
       <div className="flex items-center justify-between mb-5">
@@ -66,17 +70,24 @@ const LiveTracking: React.FC = () => {
             {/* Tiny controls */}
             <div className="absolute right-4 bottom-4 flex flex-col gap-2.5">
               <button
-                className="h-[46px] w-20 rounded-lg border border-white/10 bg-white/[0.06] text-[#eaf2ff]/85 font-black hover:bg-white/10"
+                className="h-[46px] w-20 rounded-lg border border-white/10 bg-white/[0.06] text-[#eaf2ff]/85 font-black hover:bg-white/10 transition-colors"
                 type="button"
+                onClick={handleZoomIn}
+                title="Zoom In"
               >
                 add
               </button>
               <button
-                className="h-[46px] w-20 rounded-lg border border-white/10 bg-white/[0.06] text-[#eaf2ff]/85 font-black hover:bg-white/10"
+                className="h-[46px] w-20 rounded-lg border border-white/10 bg-white/[0.06] text-[#eaf2ff]/85 font-black hover:bg-white/10 transition-colors"
                 type="button"
+                onClick={handleZoomOut}
+                title="Zoom Out"
               >
                 remove
               </button>
+              <div className="text-center text-xs text-[#eaf2ff]/60 mt-1">
+                {Math.round(zoom * 100)}%
+              </div>
             </div>
           </div>
         </section>

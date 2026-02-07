@@ -4,6 +4,10 @@ import chatai from "../../assets/chatai.png";
 const AIAssistantCard: React.FC = () => {
   const [open, setOpen] = useState(true);
   const [closing, setClosing] = useState(false);
+  const [message, setMessage] = useState("");
+  const [conversation, setConversation] = useState<string[]>([
+    "Hello! I can help you analyze gate throughput and truck arrivals. What would you like to know?",
+  ]);
 
   const closeChat = () => {
     setClosing(true);
@@ -11,6 +15,25 @@ const AIAssistantCard: React.FC = () => {
       setOpen(false);
       setClosing(false);
     }, 300); // must match CSS animation duration
+  };
+
+  const handleSuggestion = (query: string) => {
+    setConversation((prev) => [
+      ...prev,
+      `You: ${query}`,
+      `AI: Based on current data, I'm analyzing your request...`,
+    ]);
+  };
+
+  const handleSend = () => {
+    if (message.trim()) {
+      setConversation((prev) => [
+        ...prev,
+        `You: ${message}`,
+        `AI: I'm processing your query about: "${message}"`,
+      ]);
+      setMessage("");
+    }
   };
 
   return (
@@ -71,16 +94,32 @@ const AIAssistantCard: React.FC = () => {
             </button>
           </div>
 
-          <div className="p-3.5 my-3.5 mx-4 bg-white/[0.06] rounded-xl text-[13px] leading-relaxed text-[#e7eef7]/92 overflow-y-auto max-h-[180px]">
-            Hello! I can help you analyze gate throughput and truck arrivals.
-            What would you like to know?
+          <div className="p-3.5 my-3.5 mx-4 bg-white/[0.06] rounded-xl text-[13px] leading-relaxed text-[#e7eef7]/92 overflow-y-auto max-h-[180px] space-y-2">
+            {conversation.map((msg, idx) => (
+              <div
+                key={idx}
+                className={msg.startsWith("You:") ? "text-sky-300" : ""}
+              >
+                {msg}
+              </div>
+            ))}
           </div>
 
           <div className="flex flex-wrap gap-2 px-4 pb-3">
-            <button className="px-3 py-2 rounded-full text-xs font-extrabold bg-[rgba(0,140,255,0.14)] border border-[rgba(0,140,255,0.28)] text-[#8fd0ff] cursor-pointer transition-all hover:bg-[rgba(0,140,255,0.22)] hover:-translate-y-0.5">
+            <button
+              className="px-3 py-2 rounded-full text-xs font-extrabold bg-[rgba(0,140,255,0.14)] border border-[rgba(0,140,255,0.28)] text-[#8fd0ff] cursor-pointer transition-all hover:bg-[rgba(0,140,255,0.22)] hover:-translate-y-0.5"
+              onClick={() =>
+                handleSuggestion("How many trucks at Gate 1 between 10–12?")
+              }
+            >
               "How many trucks at Gate 1 between 10–12?"
             </button>
-            <button className="px-3 py-2 rounded-full text-xs font-extrabold bg-[rgba(0,140,255,0.14)] border border-[rgba(0,140,255,0.28)] text-[#8fd0ff] cursor-pointer transition-all hover:bg-[rgba(0,140,255,0.22)] hover:-translate-y-0.5">
+            <button
+              className="px-3 py-2 rounded-full text-xs font-extrabold bg-[rgba(0,140,255,0.14)] border border-[rgba(0,140,255,0.28)] text-[#8fd0ff] cursor-pointer transition-all hover:bg-[rgba(0,140,255,0.22)] hover:-translate-y-0.5"
+              onClick={() =>
+                handleSuggestion("Predict congestion for Gate 3 at 15:00")
+              }
+            >
               "Predict congestion for Gate 3 at 15:00"
             </button>
           </div>
@@ -89,8 +128,14 @@ const AIAssistantCard: React.FC = () => {
             <input
               className="flex-1 h-9 px-3 bg-white/[0.06] border border-white/[0.12] rounded-lg text-[#e7eef7] text-[13px] outline-none placeholder:text-[#e7eef7]/45"
               placeholder="Ask AI anything..."
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSend()}
             />
-            <button className="w-9 h-9 rounded-lg bg-gradient-to-b from-[rgba(0,140,255,0.95)] to-[rgba(0,110,230,0.95)] border border-[rgba(0,140,255,0.35)] text-white font-black cursor-pointer transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(0,140,255,0.35)]">
+            <button
+              className="w-9 h-9 rounded-lg bg-gradient-to-b from-[rgba(0,140,255,0.95)] to-[rgba(0,110,230,0.95)] border border-[rgba(0,140,255,0.35)] text-white font-black cursor-pointer transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(0,140,255,0.35)]"
+              onClick={handleSend}
+            >
               ➤
             </button>
           </div>

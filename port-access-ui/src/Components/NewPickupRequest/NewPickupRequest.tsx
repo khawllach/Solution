@@ -17,6 +17,15 @@ type LiveSummary = {
 const NewPickupRequest: React.FC = () => {
   const [step, setStep] = useState<StepKey>("container");
 
+  const handleNext = () => {
+    if (step === "container") setStep("driver");
+    else if (step === "driver") setStep("review");
+    else if (step === "review") {
+      alert("Pickup request submitted successfully!");
+      setStep("container");
+    }
+  };
+
   const [containerNumber, setContainerNumber] = useState("ABCD1234567");
   const [referenceNumber, setReferenceNumber] = useState("REF-0098231");
   const [containerType, setContainerType] = useState<ContainerType>("20ft");
@@ -200,11 +209,7 @@ const NewPickupRequest: React.FC = () => {
 
                 <button
                   className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-sky-500 text-white font-semibold hover:bg-sky-600 transition-colors flex items-center justify-center gap-2"
-                  onClick={() => {
-                    // basic step flow
-                    if (step === "container") setStep("driver");
-                    else if (step === "driver") setStep("review");
-                  }}
+                  onClick={handleNext}
                 >
                   Continue to Driver Details
                   <span>→</span>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import NextBooking from "../NextBooking/NextBookingCard";
 import QuickSlotBooking from "../QuickSlot/QuickSlotBooking";
@@ -80,6 +80,47 @@ const alerts: Alert[] = [
 ];
 
 const DashboardPage: React.FC = () => {
+  const [timeRange, setTimeRange] = useState("Last 12 Hours");
+  const [aiMessage, setAiMessage] = useState("");
+  const [aiConversation, setAiConversation] = useState<string[]>([
+    "Hello! I can help you analyze gate throughput and truck arrivals. What would you like to know?",
+  ]);
+
+  const handleNotifications = () => {
+    alert("Notifications: 3 new alerts");
+  };
+
+  const handleSettings = () => {
+    alert("Opening settings...");
+  };
+
+  const handleRedirect = (title: string) => {
+    alert(`Redirecting trucks from ${title}...`);
+  };
+
+  const handleDismiss = (title: string) => {
+    alert(`Alert dismissed: ${title}`);
+  };
+
+  const handleAiSuggestion = (query: string) => {
+    setAiConversation((prev) => [
+      ...prev,
+      `You: ${query}`,
+      `AI: Analyzing ${query}...`,
+    ]);
+  };
+
+  const handleAiSend = () => {
+    if (aiMessage.trim()) {
+      setAiConversation((prev) => [
+        ...prev,
+        `You: ${aiMessage}`,
+        `AI: Processing your query...`,
+      ]);
+      setAiMessage("");
+    }
+  };
+
   return (
     <div className="page">
       {/* Topbar (simple placeholder) */}
@@ -104,10 +145,18 @@ const DashboardPage: React.FC = () => {
 
         <div className="topbar-right">
           <input className="search" placeholder="Search gates, trucks..." />
-          <button className="icon-btn" aria-label="Notifications">
+          <button
+            className="icon-btn"
+            aria-label="Notifications"
+            onClick={handleNotifications}
+          >
             🔔
           </button>
-          <button className="icon-btn" aria-label="Settings">
+          <button
+            className="icon-btn"
+            aria-label="Settings"
+            onClick={handleSettings}
+          >
             ⚙️
           </button>
           <div className="avatar">K</div>
@@ -162,7 +211,20 @@ const DashboardPage: React.FC = () => {
                   <span className="dotLegend closed" />
                   Closed
                 </span>
-                <button className="dropdown">Last 12 Hours ▾</button>
+                <button
+                  className="dropdown"
+                  onClick={() => {
+                    const ranges = [
+                      "Last 6 Hours",
+                      "Last 12 Hours",
+                      "Last 24 Hours",
+                    ];
+                    const currentIdx = ranges.indexOf(timeRange);
+                    setTimeRange(ranges[(currentIdx + 1) % ranges.length]);
+                  }}
+                >
+                  {timeRange} ▾
+                </button>
               </div>
             </div>
 
@@ -263,8 +325,18 @@ const DashboardPage: React.FC = () => {
 
                   {a.actions && (
                     <div className="alertActions">
-                      <button className="btnRed">REDIRECT</button>
-                      <button className="btnDark">DISMISS</button>
+                      <button
+                        className="btnRed"
+                        onClick={() => handleRedirect(a.title)}
+                      >
+                        REDIRECT
+                      </button>
+                      <button
+                        className="btnDark"
+                        onClick={() => handleDismiss(a.title)}
+                      >
+                        DISMISS
+                      </button>
                     </div>
                   )}
                 </div>
@@ -279,22 +351,48 @@ const DashboardPage: React.FC = () => {
             </div>
 
             <div className="aiBubble">
-              Hello! I can help you analyze gate throughput and truck arrivals.
-              What would you like to know?
+              {aiConversation.map((msg, idx) => (
+                <div
+                  key={idx}
+                  className={msg.startsWith("You:") ? "text-sky-400" : ""}
+                >
+                  {msg}
+                </div>
+              ))}
             </div>
 
             <div className="aiSuggestions">
-              <button className="aiChip">
+              <button
+                className="aiChip"
+                onClick={() =>
+                  handleAiSuggestion("How many trucks at Gate 1 between 10–12?")
+                }
+              >
                 "How many trucks at Gate 1 between 10–12?"
               </button>
-              <button className="aiChip">
+              <button
+                className="aiChip"
+                onClick={() =>
+                  handleAiSuggestion("Predict congestion for Gate 3 at 15:00")
+                }
+              >
                 "Predict congestion for Gate 3 at 15:00"
               </button>
             </div>
 
             <div className="aiInputRow">
-              <input className="aiInput" placeholder="Ask AI anything..." />
-              <button className="aiSend" aria-label="Send">
+              <input
+                className="aiInput"
+                placeholder="Ask AI anything..."
+                value={aiMessage}
+                onChange={(e) => setAiMessage(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleAiSend()}
+              />
+              <button
+                className="aiSend"
+                aria-label="Send"
+                onClick={handleAiSend}
+              >
                 ➤
               </button>
             </div>

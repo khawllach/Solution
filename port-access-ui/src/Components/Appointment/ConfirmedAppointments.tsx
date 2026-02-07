@@ -1,5 +1,6 @@
 // src/components/Appointments/ConfirmedAppointments.tsx
 import React, { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type TabKey = "upcoming" | "completed" | "canceled";
 
@@ -17,11 +18,16 @@ type Appointment = {
 };
 
 const ConfirmedAppointments: React.FC = () => {
+  const navigate = useNavigate();
   const [tab, setTab] = useState<TabKey>("upcoming");
 
   const [smsAlerts, setSmsAlerts] = useState(true);
   const [whatsappAlerts, setWhatsappAlerts] = useState(false);
   const [emailAlerts, setEmailAlerts] = useState(true);
+
+  const handleBookNew = () => {
+    navigate("/carrier/control");
+  };
 
   const appointments: Appointment[] = useMemo(
     () => [
@@ -66,6 +72,7 @@ const ConfirmedAppointments: React.FC = () => {
           <button
             className="flex items-center gap-2 px-5 py-3 rounded-xl bg-sky-500 text-white font-semibold hover:bg-sky-600 transition-colors shadow-lg shadow-sky-500/30"
             type="button"
+            onClick={handleBookNew}
           >
             <span className="text-xl font-bold">＋</span> Book New Slot
           </button>
@@ -174,6 +181,9 @@ const ConfirmedAppointments: React.FC = () => {
               <button
                 className="w-full px-4 py-2.5 rounded-xl bg-sky-500 text-white font-semibold hover:bg-sky-600 transition-colors"
                 type="button"
+                onClick={() =>
+                  alert("Notification preferences updated successfully!")
+                }
               >
                 Update Preferences
               </button>

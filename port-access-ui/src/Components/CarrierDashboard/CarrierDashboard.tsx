@@ -4,6 +4,7 @@
 // Usage in App.tsx:  <CarrierDashboard />
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Ai from "../Ai/Ai";
 import Trackmap from "../Trackmap/LiveTracking";
 
@@ -355,6 +356,8 @@ const Divider = () => <div className="h-px w-full bg-white/10" />;
 /* ---------- Appointment Card ---------- */
 
 const AppointmentCard: React.FC<{ appt: Appointment }> = ({ appt }) => {
+  const navigate = useNavigate();
+
   const iconWrap =
     appt.iconTone === "blue"
       ? "bg-sky-500/15 text-sky-300 ring-sky-500/25"
@@ -371,6 +374,14 @@ const AppointmentCard: React.FC<{ appt: Appointment }> = ({ appt }) => {
     appt.footerActionTone === "blue"
       ? "text-sky-300 hover:text-sky-200"
       : "text-orange-300 hover:text-orange-200";
+
+  const handleAction = () => {
+    if (appt.footerAction === "Fix Now") {
+      navigate("/carrier/control");
+    } else {
+      alert(`Viewing details for ${appt.plate}`);
+    }
+  };
 
   return (
     <Card className="p-5">
@@ -410,7 +421,10 @@ const AppointmentCard: React.FC<{ appt: Appointment }> = ({ appt }) => {
       <Divider />
       <div className="mt-4 flex items-center justify-between gap-4">
         <div className="text-sm text-white/45">{appt.footerLeft}</div>
-        <button className={cx("text-sm font-semibold transition", actionTone)}>
+        <button
+          className={cx("text-sm font-semibold transition", actionTone)}
+          onClick={handleAction}
+        >
           {appt.footerAction} <span className="ml-1">→</span>
         </button>
       </div>
@@ -466,7 +480,10 @@ const GateEntryRules: React.FC = () => {
           </li>
         </ul>
 
-        <button className="mt-5 w-full rounded-xl bg-white/[0.06] px-4 py-3 text-sm font-semibold text-white/80 ring-1 ring-white/10 hover:bg-white/[0.09]">
+        <button
+          className="mt-5 w-full rounded-xl bg-white/[0.06] px-4 py-3 text-sm font-semibold text-white/80 ring-1 ring-white/10 hover:bg-white/[0.09]"
+          onClick={() => alert("Downloading protocol PDF...")}
+        >
           Download Full Protocol (PDF)
         </button>
       </div>
@@ -483,14 +500,28 @@ const StatusPill: React.FC<{ status: HistoryStatus }> = ({ status }) => {
   return <Badge text="Rejected (Doc)" tone="gray" />;
 };
 
-const ActionIcon: React.FC<{ kind: "eye" | "refresh" | "info" }> = ({
-  kind,
-}) => {
+const ActionIcon: React.FC<{
+  kind: "eye" | "refresh" | "info";
+  status: HistoryStatus;
+}> = ({ kind, status }) => {
   const IconComp =
     kind === "eye" ? Icon.Eye : kind === "refresh" ? Icon.Refresh : Icon.Info;
 
+  const handleClick = () => {
+    if (status === "Completed") {
+      alert("Viewing completed appointment details");
+    } else if (status === "Missed Slot") {
+      alert("Rebooking missed slot...");
+    } else {
+      alert("Viewing rejection details and required documents");
+    }
+  };
+
   return (
-    <button className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.03] ring-1 ring-white/10 hover:bg-white/[0.07] text-white/60">
+    <button
+      className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.03] ring-1 ring-white/10 hover:bg-white/[0.07] text-white/60"
+      onClick={handleClick}
+    >
       <IconComp className="h-5 w-5" />
     </button>
   );
@@ -503,6 +534,14 @@ const RecentHistory: React.FC<{ rows: HistoryRow[] }> = ({ rows }) => {
     return "info";
   };
 
+  const handleFilter = () => {
+    alert("Opening filter options...");
+  };
+
+  const handleExport = () => {
+    alert("Exporting history to CSV...");
+  };
+
   return (
     <Card className="p-0 overflow-hidden">
       <div className="px-6 py-5">
@@ -512,11 +551,17 @@ const RecentHistory: React.FC<{ rows: HistoryRow[] }> = ({ rows }) => {
           </div>
 
           <div className="flex items-center gap-2">
-            <button className="inline-flex items-center gap-2 rounded-xl bg-white/[0.04] px-4 py-2 text-sm font-semibold text-white/75 ring-1 ring-white/10 hover:bg-white/[0.08]">
+            <button
+              className="inline-flex items-center gap-2 rounded-xl bg-white/[0.04] px-4 py-2 text-sm font-semibold text-white/75 ring-1 ring-white/10 hover:bg-white/[0.08]"
+              onClick={handleFilter}
+            >
               <Icon.Filter className="h-4 w-4" />
               Filter
             </button>
-            <button className="inline-flex items-center gap-2 rounded-xl bg-white/[0.04] px-4 py-2 text-sm font-semibold text-white/75 ring-1 ring-white/10 hover:bg-white/[0.08]">
+            <button
+              className="inline-flex items-center gap-2 rounded-xl bg-white/[0.04] px-4 py-2 text-sm font-semibold text-white/75 ring-1 ring-white/10 hover:bg-white/[0.08]"
+              onClick={handleExport}
+            >
               <Icon.Export className="h-4 w-4" />
               Export
             </button>
@@ -569,7 +614,7 @@ const RecentHistory: React.FC<{ rows: HistoryRow[] }> = ({ rows }) => {
             </div>
 
             <div className="col-span-1 flex justify-end">
-              <ActionIcon kind={actionFor(r.status)} />
+              <ActionIcon kind={actionFor(r.status)} status={r.status} />
             </div>
           </div>
         ))}
@@ -580,10 +625,16 @@ const RecentHistory: React.FC<{ rows: HistoryRow[] }> = ({ rows }) => {
           Showing 3 of 152 history entries
         </div>
         <div className="flex items-center gap-2">
-          <button className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.03] ring-1 ring-white/10 hover:bg-white/[0.07] text-white/60">
+          <button
+            className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.03] ring-1 ring-white/10 hover:bg-white/[0.07] text-white/60"
+            onClick={() => alert("Previous page")}
+          >
             <Icon.ChevronLeft className="h-5 w-5" />
           </button>
-          <button className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.03] ring-1 ring-white/10 hover:bg-white/[0.07] text-white/60">
+          <button
+            className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.03] ring-1 ring-white/10 hover:bg-white/[0.07] text-white/60"
+            onClick={() => alert("Next page")}
+          >
             <Icon.ChevronRight className="h-5 w-5" />
           </button>
         </div>
@@ -595,6 +646,8 @@ const RecentHistory: React.FC<{ rows: HistoryRow[] }> = ({ rows }) => {
 /* ---------- MAIN DASHBOARD (rafce style) ---------- */
 
 const CarrierDashboard: React.FC = () => {
+  const navigate = useNavigate();
+
   const stats: Stat[] = [
     { label: "On-time Rate", value: "94.2%", accent: "blue" },
     { label: "Missed Slots", value: 3, accent: "orange" },
@@ -689,7 +742,10 @@ const CarrierDashboard: React.FC = () => {
                 </div>
               </div>
 
-              <button className="text-sm font-semibold text-sky-300 hover:text-sky-200">
+              <button
+                className="text-sm font-semibold text-sky-300 hover:text-sky-200"
+                onClick={() => navigate("/carrier/appointments")}
+              >
                 View All
               </button>
             </div>
