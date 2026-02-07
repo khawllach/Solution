@@ -1,0 +1,569 @@
+/* src/components/Dashboard/CarrierDashboard.css */
+/* Plain CSS that mimics the Tailwind-like utility classes used in your TSX.
+   Note: classes with special chars are escaped ([], :, /, etc.)
+*/
+
+/* -------- Base / globals used in this component -------- */
+
+
+/* Font */
+:root {
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.relative {
+  position: relative;
+}
+.fixed {
+  position: fixed;
+}
+.absolute {
+  position: absolute;
+}
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.w-full {
+  width: 100%;
+}
+.h-full {
+  height: 100%;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.min-w-0 {
+  min-width: 0;
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.flex {
+  display: flex;
+}
+.inline-flex {
+  display: inline-flex;
+}
+
+.items-center {
+  align-items: center;
+}
+.items-start {
+  align-items: flex-start;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.shrink-0 {
+  flex-shrink: 0;
+}
+
+/* -------- gaps / spacing -------- */
+.gap-2 {
+  gap: 0.5rem;
+}
+.gap-3 {
+  gap: 0.75rem;
+}
+.gap-4 {
+  gap: 1rem;
+}
+.gap-5 {
+  gap: 1.25rem;
+}
+.gap-6 {
+  gap: 1.5rem;
+}
+
+.mt-0\.5 {
+  margin-top: 0.125rem;
+}
+.mt-1 {
+  margin-top: 0.25rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mt-4 {
+  margin-top: 1rem;
+}
+.mt-5 {
+  margin-top: 1.25rem;
+}
+.mt-8 {
+  margin-top: 2rem;
+}
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
+.ml-1 {
+  margin-left: 0.25rem;
+}
+
+.p-0 {
+  padding: 0;
+}
+.p-4 {
+  padding: 1rem;
+}
+.p-5 {
+  padding: 1.25rem;
+}
+
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* -------- typography -------- */
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.tracking-wide {
+  letter-spacing: 0.025em;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* -------- colors with opacity (Tailwind style) -------- */
+.bg-\[\#070b14\] {
+  background: #070b14;
+}
+
+.text-white\/95 {
+  color: rgba(255, 255, 255, 0.95);
+}
+.text-white\/90 {
+  color: rgba(255, 255, 255, 0.9);
+}
+.text-white\/85 {
+  color: rgba(255, 255, 255, 0.85);
+}
+.text-white\/80 {
+  color: rgba(255, 255, 255, 0.8);
+}
+.text-white\/75 {
+  color: rgba(255, 255, 255, 0.75);
+}
+.text-white\/60 {
+  color: rgba(255, 255, 255, 0.6);
+}
+.text-white\/55 {
+  color: rgba(255, 255, 255, 0.55);
+}
+.text-white\/45 {
+  color: rgba(255, 255, 255, 0.45);
+}
+.text-white\/40 {
+  color: rgba(255, 255, 255, 0.4);
+}
+.text-white\/35 {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* sky/orange/emerald/rose approximations */
+.text-sky-300 {
+  color: #7dd3fc;
+}
+.text-sky-200 {
+  color: #bae6fd;
+}
+.text-orange-300 {
+  color: #fdba74;
+}
+.text-orange-200\/80 {
+  color: rgba(254, 215, 170, 0.8);
+}
+.text-emerald-300 {
+  color: #6ee7b7;
+}
+.text-rose-300 {
+  color: #fda4af;
+}
+
+/* backgrounds with opacity */
+.bg-white\/10 {
+  background: rgba(255, 255, 255, 0.1);
+}
+.bg-white\/\[0\.03\] {
+  background: rgba(255, 255, 255, 0.03);
+}
+.bg-white\/\[0\.04\] {
+  background: rgba(255, 255, 255, 0.04);
+}
+.bg-white\/\[0\.06\] {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.bg-sky-500\/10 {
+  background: rgba(14, 165, 233, 0.1);
+}
+.bg-sky-500\/15 {
+  background: rgba(14, 165, 233, 0.15);
+}
+
+.bg-orange-500\/8 {
+  background: rgba(249, 115, 22, 0.08);
+}
+.bg-orange-500\/10 {
+  background: rgba(249, 115, 22, 0.1);
+}
+.bg-orange-500\/15 {
+  background: rgba(249, 115, 22, 0.15);
+}
+
+/* solid color bars */
+.bg-sky-500 {
+  background: #0ea5e9;
+}
+.bg-orange-500 {
+  background: #f97316;
+}
+
+/* -------- borders / rings -------- */
+.rounded-full {
+  border-radius: 9999px;
+}
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+.rounded-2xl {
+  border-radius: 1rem;
+}
+
+.ring-1 {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+.ring-white\/10 {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+}
+
+.ring-white\/15 {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+}
+
+.ring-sky-500\/25 {
+  box-shadow: 0 0 0 1px rgba(14, 165, 233, 0.25) inset;
+}
+
+.ring-orange-500\/15 {
+  box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.15) inset;
+}
+.ring-orange-500\/20 {
+  box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.2) inset;
+}
+.ring-orange-500\/25 {
+  box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.25) inset;
+}
+
+/* Border utilities used */
+.border-t {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.border-white\/10 {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* -------- shadows -------- */
+.shadow-\[0_22px_70px_-38px_rgba\(0\,0\,0\,0\.85\)\] {
+  box-shadow: 0 22px 70px -38px rgba(0, 0, 0, 0.85);
+}
+
+/* -------- sizing utilities -------- */
+.min-w-\[150px\] {
+  min-width: 150px;
+}
+.w-\[3px\] {
+  width: 3px;
+}
+.h-9 {
+  height: 2.25rem;
+}
+.w-9 {
+  width: 2.25rem;
+}
+.h-10 {
+  height: 2.5rem;
+}
+.w-10 {
+  width: 2.5rem;
+}
+.h-12 {
+  height: 3rem;
+}
+.w-12 {
+  width: 3rem;
+}
+.h-4 {
+  height: 1rem;
+}
+.w-4 {
+  width: 1rem;
+}
+.h-5 {
+  height: 1.25rem;
+}
+.w-5 {
+  width: 1.25rem;
+}
+.h-6 {
+  height: 1.5rem;
+}
+.w-6 {
+  width: 1.5rem;
+}
+
+/* max width container used */
+.max-w-\[1400px\] {
+  max-width: 1400px;
+}
+
+/* -------- backgrounds / blur / glow circles -------- */
+.blur-3xl {
+  filter: blur(64px);
+}
+
+.left-\[-220px\] {
+  left: -220px;
+}
+.top-\[-220px\] {
+  top: -220px;
+}
+.right-\[-180px\] {
+  right: -180px;
+}
+.top-\[120px\] {
+  top: 120px;
+}
+.left-\[35\%\] {
+  left: 35%;
+}
+.bottom-\[-260px\] {
+  bottom: -260px;
+}
+
+.h-\[520px\] {
+  height: 520px;
+}
+.w-\[520px\] {
+  width: 520px;
+}
+
+/* rounded-full already defined */
+
+/* -------- transitions / hover -------- */
+.transition {
+  transition: 0.2s ease;
+}
+
+.hover\:text-sky-200:hover {
+  color: #bae6fd;
+}
+.hover\:text-orange-200:hover {
+  color: #fed7aa;
+}
+
+.hover\:bg-white\/\[0\.07\]:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+.hover\:bg-white\/\[0\.08\]:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.hover\:bg-white\/\[0\.09\]:hover {
+  background: rgba(255, 255, 255, 0.09);
+}
+
+/* -------- grid utilities used in table / layout -------- */
+.grid {
+  display: grid;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-12 {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+
+.col-span-1 {
+  grid-column: span 1 / span 1;
+}
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
+.col-span-3 {
+  grid-column: span 3 / span 3;
+}
+.col-span-4 {
+  grid-column: span 4 / span 4;
+}
+
+.border-t.border-white\/10 {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* -------- Special exact text size class used -------- */
+.text-\[11px\] {
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+/* -------- Button look used in your TSX -------- */
+button {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background: transparent;
+}
+
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+
+/* -------- Responsive (md / lg) utilities used -------- */
+/* md: */
+@media (min-width: 768px) {
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* lg: */
+@media (min-width: 1024px) {
+  .lg\:flex-row {
+    flex-direction: row;
+  }
+
+  .lg\:items-start {
+    align-items: flex-start;
+  }
+
+  .lg\:justify-between {
+    justify-content: space-between;
+  }
+
+  .lg\:justify-end {
+    justify-content: flex-end;
+  }
+
+  .lg\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .lg\:col-span-8 {
+    grid-column: span 8 / span 8;
+  }
+
+  .lg\:col-span-4 {
+    grid-column: span 4 / span 4;
+  }
+}
+
+/* -------- A few helpful defaults for links -------- */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}

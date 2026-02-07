@@ -1,0 +1,549 @@
+/* Page background (dark) */
+.prqPage {
+  min-height: 100vh;
+  background: radial-gradient(1200px 600px at 20% 0%, rgba(30, 60, 90, 0.25), transparent 55%),
+              radial-gradient(1000px 500px at 85% 10%, rgba(30, 120, 160, 0.18), transparent 55%),
+              #0b121a;
+  color: #e7eef7;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+
+}
+
+/* Adjust this padding-top if your Topbar height differs */
+.prqContainer {
+  padding: 28px;
+  padding-top: 96px; /* space under topbar */
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+/* Header */
+.prqHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.prqTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.prqTitle {
+  font-size: 34px;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  margin: 0;
+  font-weight: 800;
+}
+
+.prqPill {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0, 140, 255, 0.18);
+  border: 1px solid rgba(0, 140, 255, 0.35);
+  color: #7cc3ff;
+}
+
+.prqSubtitle {
+  margin: 8px 0 0;
+  color: rgba(231, 238, 247, 0.65);
+  font-size: 14px;
+}
+
+.prqHeaderActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.prqBtn {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
+  color: #e7eef7;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.12s ease, border 0.12s ease;
+}
+
+.prqBtn:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.prqBtnIcon {
+  margin-right: 8px;
+  opacity: 0.9;
+}
+
+.prqBtnGhost {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.prqBtnPrimary {
+  background: linear-gradient(180deg, rgba(0, 140, 255, 0.95), rgba(0, 110, 230, 0.95));
+  border-color: rgba(0, 140, 255, 0.35);
+}
+
+.prqBtnPrimary:hover {
+  background: linear-gradient(180deg, rgba(0, 155, 255, 1), rgba(0, 120, 245, 1));
+}
+
+.prqBtnPrimarySm {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(0, 140, 255, 0.95), rgba(0, 110, 230, 0.95));
+  border-color: rgba(0, 140, 255, 0.35);
+  font-size: 12px;
+}
+
+.prqBtnDangerSm {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 80, 90, 0.25);
+  color: #ff8b92;
+  font-size: 12px;
+}
+
+.prqBtnCaret {
+  padding: 8px 10px;
+  border-left: 1px solid rgba(255, 80, 90, 0.25);
+  margin-left: -6px;
+}
+
+/* Cards */
+.prqCard {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+}
+
+/* Filters */
+.prqFilters {
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.prqFiltersLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.prqFiltersLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(231, 238, 247, 0.7);
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  font-size: 12px;
+}
+
+.prqFunnel {
+  opacity: 0.8;
+}
+
+.prqSelect {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 140px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(231, 238, 247, 0.88);
+  cursor: pointer;
+}
+
+.prqSelectSmall {
+  min-width: 72px;
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+
+.prqSelectText {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.prqSelectCaret {
+  opacity: 0.7;
+}
+
+.prqRiskToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 80, 90, 0.25);
+  background: rgba(255, 80, 90, 0.10);
+  color: #ff98a0;
+  font-weight: 800;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.prqRiskToggle.isOn {
+  background: rgba(255, 80, 90, 0.18);
+  border-color: rgba(255, 80, 90, 0.38);
+}
+
+.prqRiskIcon {
+  opacity: 0.9;
+}
+
+.prqFiltersRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.prqShowing {
+  color: rgba(231, 238, 247, 0.55);
+  font-size: 13px;
+}
+
+.prqPagerMini {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.prqIconBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(231, 238, 247, 0.85);
+  cursor: pointer;
+}
+
+.prqIconBtn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Table */
+.prqTableCard {
+  overflow: hidden;
+}
+
+.prqTableHead {
+  display: grid;
+  grid-template-columns: 40px 240px 200px 170px 120px 220px 220px;
+  gap: 0;
+  padding: 14px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.prqTh {
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  font-weight: 900;
+  color: rgba(231, 238, 247, 0.55);
+}
+
+.prqThRight {
+  text-align: right;
+}
+
+.prqTableBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.prqRow {
+  display: grid;
+  grid-template-columns: 40px 240px 200px 170px 120px 220px 220px;
+  padding: 14px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  align-items: center;
+}
+
+.prqRow:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Checkbox */
+.prqCheckbox {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.prqCheckbox input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+}
+
+.prqCheckMark {
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.20);
+  display: inline-block;
+}
+
+.prqCheckbox input:checked + .prqCheckMark {
+  background: rgba(0, 140, 255, 0.85);
+  border-color: rgba(0, 140, 255, 0.35);
+}
+
+/* Carrier cell */
+.prqCarrier {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.prqAvatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.prqCarrierName {
+  font-weight: 900;
+  font-size: 14px;
+  color: rgba(231, 238, 247, 0.95);
+}
+
+.prqCarrierId {
+  margin-top: 2px;
+  font-size: 12px;
+  color: rgba(231, 238, 247, 0.45);
+}
+
+/* Vehicle cell */
+.prqVehicleNo {
+  font-weight: 900;
+  font-size: 13px;
+}
+
+.prqDriver {
+  margin-top: 2px;
+  font-size: 12px;
+  color: rgba(231, 238, 247, 0.45);
+}
+
+/* Slot cell */
+.prqSlotTime {
+  font-weight: 900;
+  font-size: 13px;
+}
+
+.prqSlotDate {
+  margin-top: 2px;
+  font-size: 12px;
+  color: rgba(231, 238, 247, 0.45);
+}
+
+/* Gate */
+.prqGatePill {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.20);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: rgba(231, 238, 247, 0.80);
+  font-weight: 800;
+  font-size: 12px;
+}
+
+/* Risk */
+.prqBadge {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.prqBadge.warn {
+  background: rgba(255, 170, 0, 0.14);
+  border-color: rgba(255, 170, 0, 0.25);
+  color: #ffcf7a;
+}
+
+.prqBadge.danger {
+  background: rgba(255, 80, 90, 0.14);
+  border-color: rgba(255, 80, 90, 0.25);
+  color: #ff9aa1;
+}
+
+.prqRiskMuted {
+  color: rgba(231, 238, 247, 0.45);
+  font-style: italic;
+  font-size: 12px;
+}
+
+/* Actions */
+.prqActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.prqSplitBtn {
+  display: inline-flex;
+  gap: 6px;
+}
+
+/* Footer (table) */
+.prqTableFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.prqItemsPerPage {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(231, 238, 247, 0.55);
+  font-size: 13px;
+}
+
+.prqPagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.prqPageBtn {
+  min-width: 34px;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(231, 238, 247, 0.85);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.prqPageBtn.isActive {
+  background: rgba(0, 140, 255, 0.85);
+  border-color: rgba(0, 140, 255, 0.35);
+  color: #fff;
+}
+
+.prqDots {
+  color: rgba(231, 238, 247, 0.45);
+}
+
+/* Stats cards */
+.prqStatsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.prqStat {
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.prqStatIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 140, 255, 0.10);
+  border: 1px solid rgba(0, 140, 255, 0.18);
+}
+
+.prqStatLabel {
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  font-weight: 900;
+  color: rgba(231, 238, 247, 0.55);
+}
+
+.prqStatValue {
+  margin-top: 6px;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.3px;
+}
+
+.prqStatUnit {
+  font-size: 14px;
+  color: rgba(231, 238, 247, 0.55);
+  font-weight: 800;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .prqTableHead,
+  .prqRow {
+    grid-template-columns: 40px 220px 180px 160px 110px 200px 200px;
+  }
+}
+
+@media (max-width: 980px) {
+  .prqStatsGrid {
+    grid-template-columns: 1fr;
+  }
+  .prqHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .prqHeaderActions {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  /* On small screens, allow horizontal scroll for table */
+  .prqTableCard {
+    overflow-x: auto;
+  }
+  .prqTableHead,
+  .prqRow {
+    min-width: 980px;
+  }
+}
