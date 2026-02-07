@@ -1,6 +1,5 @@
 // src/components/Auth/PortalSelect.tsx
 import React from "react";
-import "./PortalSelect.css";
 
 const PortalSelect: React.FC = () => {
   return (

@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 
-import "./PendingRequestsPage.css";
 import Topbar from "../Layouts/Topbar";
 import Ai from "../Ai/Ai";
 

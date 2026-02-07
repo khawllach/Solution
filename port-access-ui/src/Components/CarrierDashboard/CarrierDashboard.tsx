@@ -4,7 +4,6 @@
 // Usage in App.tsx:  <CarrierDashboard />
 
 import React from "react";
-import "./CarrierDashboard.css";
 import Ai from "../Ai/Ai";
 import Trackmap from "../Trackmap/LiveTracking";
 
@@ -653,7 +652,7 @@ const CarrierDashboard: React.FC = () => {
   ];
 
   return (
-    <div className="cd-page">
+    <div className="min-h-screen bg-[#070b14] text-white">
       <div className="pointer-events-none fixed inset-0">
         <div className="absolute left-[-220px] top-[-220px] h-[520px] w-[520px] rounded-full bg-sky-500/10 blur-3xl" />
         <div className="absolute right-[-180px] top-[120px] h-[520px] w-[520px] rounded-full bg-orange-500/8 blur-3xl" />

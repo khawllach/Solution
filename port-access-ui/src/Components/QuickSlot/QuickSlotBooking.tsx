@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from "react";
-import "./QuickSlotBooking.css";
 import { Plus } from "lucide-react";
 
 type SlotStatus = "Available" | "Filling Fast" | "Full";
@@ -35,7 +34,10 @@ const QuickSlotBooking: React.FC = () => {
       <div className="qs-filters">
         <div className="qs-field">
           <div className="qs-label">TERMINAL</div>
-          <select value={terminal} onChange={(e) => setTerminal(e.target.value)}>
+          <select
+            value={terminal}
+            onChange={(e) => setTerminal(e.target.value)}
+          >
             <option>Terminal A (Main)</option>
             <option>Terminal 4A</option>
             <option>Terminal B</option>
@@ -73,7 +75,11 @@ const QuickSlotBooking: React.FC = () => {
 
         {rows.map((r) => {
           const fillClass =
-            r.status === "Available" ? "ok" : r.status === "Filling Fast" ? "warn" : "bad";
+            r.status === "Available"
+              ? "ok"
+              : r.status === "Filling Fast"
+                ? "warn"
+                : "bad";
           const statusClass = fillClass;
           const isFull = r.status === "Full";
 
@@ -84,16 +90,24 @@ const QuickSlotBooking: React.FC = () => {
               <div className="qs-cell">
                 <div className="qs-cap">
                   <div className="qs-capTrack">
-                    <div className={`qs-capFill ${fillClass}`} style={{ width: `${r.capacityPct}%` }} />
+                    <div
+                      className={`qs-capFill ${fillClass}`}
+                      style={{ width: `${r.capacityPct}%` }}
+                    />
                   </div>
                   <div className="qs-capPct">{r.capacityPct}%</div>
                 </div>
               </div>
 
-              <div className={`qs-cell qs-status ${statusClass}`}>{r.status}</div>
+              <div className={`qs-cell qs-status ${statusClass}`}>
+                {r.status}
+              </div>
 
               <div className="qs-cell qs-right">
-                <button className={`qs-action ${isFull ? "muted" : ""}`} disabled={isFull}>
+                <button
+                  className={`qs-action ${isFull ? "muted" : ""}`}
+                  disabled={isFull}
+                >
                   {isFull ? "Waitlist" : "Book Now"}
                 </button>
               </div>

@@ -1,6 +1,5 @@
 // src/components/Pickups/ReviewSubmitStep.tsx
 import React from "react";
-import "./ReviewSubmitStep.css";
 
 type StepState = "done" | "active" | "idle";
 

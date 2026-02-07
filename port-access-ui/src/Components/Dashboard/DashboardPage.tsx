@@ -1,16 +1,30 @@
 import React from "react";
-import "./DashboardPage.css";
 
 import NextBooking from "../NextBooking/NextBookingCard";
 import QuickSlotBooking from "../QuickSlot/QuickSlotBooking";
 
-type Stat = { label: string; value: string; delta?: string; deltaTone?: "up" | "down" | "neutral" };
+type Stat = {
+  label: string;
+  value: string;
+  delta?: string;
+  deltaTone?: "up" | "down" | "neutral";
+};
 
 const stats: Stat[] = [
   { label: "ACTIVE GATES", value: "18/24", delta: "↗ 4%", deltaTone: "up" },
-  { label: "AVG. WAIT TIME", value: "14.2m", delta: "↗ 1.5m", deltaTone: "down" },
+  {
+    label: "AVG. WAIT TIME",
+    value: "14.2m",
+    delta: "↗ 1.5m",
+    deltaTone: "down",
+  },
   { label: "THROUGHPUT", value: "142 tph", delta: "Target", deltaTone: "up" },
-  { label: "CONFIRMED SLOTS", value: "89%", delta: "Utilization", deltaTone: "neutral" },
+  {
+    label: "CONFIRMED SLOTS",
+    value: "89%",
+    delta: "Utilization",
+    deltaTone: "neutral",
+  },
 ];
 
 type AlertType = "urgent" | "info" | "warning";
@@ -28,7 +42,8 @@ const alerts: Alert[] = [
     type: "urgent",
     title: "URGENT: Gate 2 Full",
     time: "12:44:02",
-    message: "Congestion detected. 4 trucks in queue exceeding capacity threshold.",
+    message:
+      "Congestion detected. 4 trucks in queue exceeding capacity threshold.",
     actions: true,
   },
   {
@@ -89,8 +104,12 @@ const DashboardPage: React.FC = () => {
 
         <div className="topbar-right">
           <input className="search" placeholder="Search gates, trucks..." />
-          <button className="icon-btn" aria-label="Notifications">🔔</button>
-          <button className="icon-btn" aria-label="Settings">⚙️</button>
+          <button className="icon-btn" aria-label="Notifications">
+            🔔
+          </button>
+          <button className="icon-btn" aria-label="Settings">
+            ⚙️
+          </button>
           <div className="avatar">K</div>
         </div>
       </header>
@@ -100,7 +119,7 @@ const DashboardPage: React.FC = () => {
         {/* Middle section: scrolls independently */}
         <main className="mainScroll">
           {/*NextBookingCard*/}
-          <NextBooking/>
+          <NextBooking />
           {/* Stats row */}
           <div className="statsRow">
             {stats.map((s) => (
@@ -109,14 +128,16 @@ const DashboardPage: React.FC = () => {
                 <div className="statValueRow">
                   <div className="statValue">{s.value}</div>
                   {s.delta && (
-                    <div className={`statDelta ${s.deltaTone ?? "neutral"}`}>{s.delta}</div>
+                    <div className={`statDelta ${s.deltaTone ?? "neutral"}`}>
+                      {s.delta}
+                    </div>
                   )}
                 </div>
               </div>
             ))}
           </div>
           {/*quicSlot*/}
-          <QuickSlotBooking/>
+          <QuickSlotBooking />
 
           {/* Heatmap card */}
           <section className="card">
@@ -125,10 +146,22 @@ const DashboardPage: React.FC = () => {
                 <span className="sqIcon" /> Gate Saturation Heatmap
               </div>
               <div className="legend">
-                <span className="pillLegend"><span className="dotLegend open" />Open</span>
-                <span className="pillLegend"><span className="dotLegend near" />Near Full</span>
-                <span className="pillLegend"><span className="dotLegend full" />Full</span>
-                <span className="pillLegend"><span className="dotLegend closed" />Closed</span>
+                <span className="pillLegend">
+                  <span className="dotLegend open" />
+                  Open
+                </span>
+                <span className="pillLegend">
+                  <span className="dotLegend near" />
+                  Near Full
+                </span>
+                <span className="pillLegend">
+                  <span className="dotLegend full" />
+                  Full
+                </span>
+                <span className="pillLegend">
+                  <span className="dotLegend closed" />
+                  Closed
+                </span>
                 <button className="dropdown">Last 12 Hours ▾</button>
               </div>
             </div>
@@ -136,8 +169,23 @@ const DashboardPage: React.FC = () => {
             <div className="heatmap">
               <div className="heatmapHead">
                 <div className="heatmapLeftHead">GATE / TIME</div>
-                {["08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00"].map((t) => (
-                  <div key={t} className="heatTime">{t}</div>
+                {[
+                  "08:00",
+                  "09:00",
+                  "10:00",
+                  "11:00",
+                  "12:00",
+                  "13:00",
+                  "14:00",
+                  "15:00",
+                  "16:00",
+                  "17:00",
+                  "18:00",
+                  "19:00",
+                ].map((t) => (
+                  <div key={t} className="heatTime">
+                    {t}
+                  </div>
                 ))}
               </div>
 
@@ -148,12 +196,38 @@ const DashboardPage: React.FC = () => {
                     // demo pattern similar vibe
                     const cls =
                       idx === 0
-                        ? (c === 2 ? "near" : c === 3 || c === 4 ? "full" : "open")
+                        ? c === 2
+                          ? "near"
+                          : c === 3 || c === 4
+                            ? "full"
+                            : "open"
                         : idx === 1
-                          ? (c < 3 ? "full" : c < 6 ? "near" : c < 9 ? "closed" : "open")
+                          ? c < 3
+                            ? "full"
+                            : c < 6
+                              ? "near"
+                              : c < 9
+                                ? "closed"
+                                : "open"
                           : idx === 2
-                            ? (c < 2 ? "closed" : c < 4 ? "open" : c < 6 ? "near" : c < 9 ? "full" : c === 9 ? "near" : "open")
-                            : (c < 2 ? "closed" : c < 6 ? "open" : c < 8 ? "near" : "open");
+                            ? c < 2
+                              ? "closed"
+                              : c < 4
+                                ? "open"
+                                : c < 6
+                                  ? "near"
+                                  : c < 9
+                                    ? "full"
+                                    : c === 9
+                                      ? "near"
+                                      : "open"
+                            : c < 2
+                              ? "closed"
+                              : c < 6
+                                ? "open"
+                                : c < 8
+                                  ? "near"
+                                  : "open";
 
                     return <div key={c} className={`heatCell ${cls}`} />;
                   })}
@@ -161,7 +235,6 @@ const DashboardPage: React.FC = () => {
               ))}
             </div>
           </section>
-
 
           {/* bottom space like screenshot */}
           <div className="mainSpacer" />
@@ -206,17 +279,24 @@ const DashboardPage: React.FC = () => {
             </div>
 
             <div className="aiBubble">
-              Hello! I can help you analyze gate throughput and truck arrivals. What would you like to know?
+              Hello! I can help you analyze gate throughput and truck arrivals.
+              What would you like to know?
             </div>
 
             <div className="aiSuggestions">
-              <button className="aiChip">"How many trucks at Gate 1 between 10–12?"</button>
-              <button className="aiChip">"Predict congestion for Gate 3 at 15:00"</button>
+              <button className="aiChip">
+                "How many trucks at Gate 1 between 10–12?"
+              </button>
+              <button className="aiChip">
+                "Predict congestion for Gate 3 at 15:00"
+              </button>
             </div>
 
             <div className="aiInputRow">
               <input className="aiInput" placeholder="Ask AI anything..." />
-              <button className="aiSend" aria-label="Send">➤</button>
+              <button className="aiSend" aria-label="Send">
+                ➤
+              </button>
             </div>
 
             <div className="aiFooter">Node: US-EAST-01 • v2.4.12-PRO</div>

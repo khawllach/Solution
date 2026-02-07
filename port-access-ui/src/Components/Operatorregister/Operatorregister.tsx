@@ -1,6 +1,5 @@
 // src/components/Auth/OperatorRegister.tsx
 import React, { useState } from "react";
-import "./Operatorregister.css";
 
 const OperatorRegister: React.FC = () => {
   // ✅ Operator form fields

@@ -1,6 +1,5 @@
 // src/components/Appointments/ConfirmedAppointments.tsx
 import React, { useMemo, useState } from "react";
-import "./ConfirmedAppointments.css";
 
 type TabKey = "upcoming" | "completed" | "canceled";
 
@@ -51,118 +50,170 @@ const ConfirmedAppointments: React.FC = () => {
   );
 
   return (
-    <div className="ca-page">
-      <div className="ca-wrap">
+    <div className="min-h-screen bg-gradient-to-br from-[#f8fafc] to-[#e2e8f0] py-8 px-4">
+      <div className="max-w-[1200px] mx-auto">
         {/* Header */}
-
-        <div className="ca-header">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
           <div>
-            <h1 className="ca-title">Confirmed Appointments</h1>
-            <p className="ca-subtitle">
+            <h1 className="text-3xl font-extrabold text-[#0f172a]">
+              Confirmed Appointments
+            </h1>
+            <p className="mt-2 text-[#64748b] text-sm">
               View and manage your upcoming gate entry slots and QR credentials.
             </p>
           </div>
 
-          <button className="ca-bookBtn" type="button">
-            <span className="ca-plus">＋</span> Book New Slot
+          <button
+            className="flex items-center gap-2 px-5 py-3 rounded-xl bg-sky-500 text-white font-semibold hover:bg-sky-600 transition-colors shadow-lg shadow-sky-500/30"
+            type="button"
+          >
+            <span className="text-xl font-bold">＋</span> Book New Slot
           </button>
         </div>
 
         {/* Tabs */}
-        <div className="ca-tabs">
-          <button
-            className={`ca-tab ${tab === "upcoming" ? "is-active" : ""}`}
-            onClick={() => setTab("upcoming")}
-            type="button"
-          >
-            Upcoming (3)
-          </button>
-          <button
-            className={`ca-tab ${tab === "completed" ? "is-active" : ""}`}
-            onClick={() => setTab("completed")}
-            type="button"
-          >
-            Completed
-          </button>
-          <button
-            className={`ca-tab ${tab === "canceled" ? "is-active" : ""}`}
-            onClick={() => setTab("canceled")}
-            type="button"
-          >
-            Canceled
-          </button>
-          <div className="ca-tabLine" />
+        <div className="relative mb-6">
+          <div className="flex gap-6 border-b border-[#e7e9ee]">
+            <button
+              className={`pb-3 px-1 text-sm font-semibold transition-colors relative ${
+                tab === "upcoming"
+                  ? "text-sky-500"
+                  : "text-[#64748b] hover:text-[#0f172a]"
+              }`}
+              onClick={() => setTab("upcoming")}
+              type="button"
+            >
+              Upcoming (3)
+              {tab === "upcoming" && (
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-sky-500 rounded-full" />
+              )}
+            </button>
+            <button
+              className={`pb-3 px-1 text-sm font-semibold transition-colors relative ${
+                tab === "completed"
+                  ? "text-sky-500"
+                  : "text-[#64748b] hover:text-[#0f172a]"
+              }`}
+              onClick={() => setTab("completed")}
+              type="button"
+            >
+              Completed
+              {tab === "completed" && (
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-sky-500 rounded-full" />
+              )}
+            </button>
+            <button
+              className={`pb-3 px-1 text-sm font-semibold transition-colors relative ${
+                tab === "canceled"
+                  ? "text-sky-500"
+                  : "text-[#64748b] hover:text-[#0f172a]"
+              }`}
+              onClick={() => setTab("canceled")}
+              type="button"
+            >
+              Canceled
+              {tab === "canceled" && (
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-sky-500 rounded-full" />
+              )}
+            </button>
+          </div>
         </div>
 
-        <div className="ca-grid">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
           {/* Left column: cards */}
-          <section className="ca-left">
+          <section className="space-y-5">
             {appointments.map((a) => (
               <AppointmentCard key={a.id} appt={a} />
             ))}
           </section>
 
           {/* Right column: panels */}
-          <aside className="ca-right">
-            <div className="ca-panel">
-              <div className="ca-panelHead">
-                <BellIcon className="ca-panelIcon" />
-                <div className="ca-panelTitle">Stay Updated</div>
+          <aside className="space-y-5 h-fit sticky top-8">
+            <div className="rounded-2xl bg-white border border-[#e7e9ee] shadow-sm p-5">
+              <div className="flex items-center gap-3 mb-5">
+                <BellIcon className="w-5 h-5 text-sky-500" />
+                <div className="text-base font-bold text-[#0f172a]">
+                  Stay Updated
+                </div>
               </div>
 
-              <div className="ca-panelBlock">
-                <div className="ca-panelLabel">RDV Confirmation</div>
+              <div className="space-y-4 mb-5">
+                <div className="text-xs font-semibold tracking-wide text-[#64748b] mb-3">
+                  RDV Confirmation
+                </div>
 
                 <ToggleRow
-                  icon={<ChatIcon className="ca-rowIcon" />}
+                  icon={<ChatIcon className="w-4 h-4" />}
                   label="SMS Alerts"
                   checked={smsAlerts}
                   onChange={setSmsAlerts}
                 />
                 <ToggleRow
-                  icon={<ChatIcon className="ca-rowIcon" />}
+                  icon={<ChatIcon className="w-4 h-4" />}
                   label="WhatsApp Notification"
                   checked={whatsappAlerts}
                   onChange={setWhatsappAlerts}
                 />
               </div>
 
-              <div className="ca-panelDivider" />
+              <div className="h-px bg-[#e7e9ee] my-4" />
 
-              <div className="ca-panelBlock">
-                <div className="ca-panelLabel">RDV Cancellations</div>
+              <div className="space-y-4 mb-5">
+                <div className="text-xs font-semibold tracking-wide text-[#64748b] mb-3">
+                  RDV Cancellations
+                </div>
 
                 <ToggleRow
-                  icon={<MailIcon className="ca-rowIcon" />}
+                  icon={<MailIcon className="w-4 h-4" />}
                   label="Email Alerts"
                   checked={emailAlerts}
                   onChange={setEmailAlerts}
                 />
               </div>
 
-              <button className="ca-panelBtn" type="button">
+              <button
+                className="w-full px-4 py-2.5 rounded-xl bg-sky-500 text-white font-semibold hover:bg-sky-600 transition-colors"
+                type="button"
+              >
                 Update Preferences
               </button>
             </div>
 
-            <div className="ca-policy">
-              <div className="ca-policyHead">
-                <InfoIcon className="ca-policyIcon" />
-                <div className="ca-policyTitle">Gate Entry Policy</div>
+            <div className="rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 shadow-sm p-5 relative overflow-hidden">
+              <div className="flex items-center gap-3 mb-4">
+                <InfoIcon className="w-5 h-5 text-amber-600" />
+                <div className="text-base font-bold text-amber-900">
+                  Gate Entry Policy
+                </div>
               </div>
 
-              <ul className="ca-policyList">
-                <li>Arrive at least 10 mins before your slot.</li>
-                <li>QR code must be ready for scanning.</li>
-                <li>Valid ID required for all drivers.</li>
-                <li>No trailer unhooking in Zone B.</li>
+              <ul className="space-y-2 mb-4 text-sm text-amber-900/80">
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-500 mt-1">•</span>
+                  <span>Arrive at least 10 mins before your slot.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-500 mt-1">•</span>
+                  <span>QR code must be ready for scanning.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-500 mt-1">•</span>
+                  <span>Valid ID required for all drivers.</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-500 mt-1">•</span>
+                  <span>No trailer unhooking in Zone B.</span>
+                </li>
               </ul>
 
-              <button className="ca-policyBtn" type="button">
+              <button
+                className="w-full px-4 py-2.5 rounded-xl border-2 border-amber-300 bg-white/80 text-amber-900 font-semibold hover:bg-white transition-colors"
+                type="button"
+              >
                 View Manual
               </button>
 
-              <div className="ca-policyMark" aria-hidden="true">
+              <div className="absolute bottom-3 right-3 w-12 h-12 rounded-full bg-amber-200/50 flex items-center justify-center text-amber-600 font-black text-xl">
                 i
               </div>
             </div>
@@ -181,74 +232,107 @@ const AppointmentCard: React.FC<{ appt: Appointment }> = ({ appt }) => {
   const badgeTone = appt.status === "CONFIRMED" ? "green" : "blue";
 
   return (
-    <div className="ca-card">
-      <div className="ca-cardLeft">
-        <div className={`ca-badge ca-badge--${badgeTone}`}>{appt.status}</div>
-
-        <div className="ca-rdv">{appt.id}</div>
-
-        <div className="ca-metaRow">
-          <div className="ca-metaBlock">
-            <div className="ca-metaLabel">TIME WINDOW</div>
-            <div className="ca-metaValue">
-              {appt.timeWindow}{" "}
-              <span className="ca-metaDim">({appt.durationMins} mins)</span>
-            </div>
-          </div>
-
-          <div className="ca-metaSplit" />
-
-          <div className="ca-metaBlock">
-            <div className="ca-metaLabel">DRIVER</div>
-            <div className="ca-metaValue">{appt.driver}</div>
-          </div>
-        </div>
-
-        <div className="ca-actions">
-          {appt.status === "CONFIRMED" ? (
-            <>
-              <button className="ca-btn" type="button">
-                <PrintIcon className="ca-btnIcon" />
-                Print Pass
-              </button>
-              <button className="ca-btn" type="button">
-                <DownloadIcon className="ca-btnIcon" />
-                PDF
-              </button>
-              <button className="ca-x" type="button" title="Cancel">
-                ✕
-              </button>
-            </>
-          ) : (
-            <button className="ca-btnWide" type="button">
-              Pass Details
-              <LockIcon className="ca-lock" />
-            </button>
-          )}
-        </div>
-      </div>
-
-      <div className="ca-cardRight">
-        <div className="ca-rightTop">
-          <div className="ca-date">{appt.date}</div>
-          <div className="ca-gate">{appt.gate}</div>
-        </div>
-
-        <div className="ca-qrWrap">
+    <div className="rounded-2xl bg-white border border-[#e7e9ee] shadow-sm overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_200px] gap-0">
+        <div className="p-6">
           <div
-            className={`ca-qr ${appt.qrState === "pending" ? "is-blur" : ""}`}
+            className={`inline-flex px-3 py-1 rounded-full text-xs font-bold ${
+              badgeTone === "green"
+                ? "bg-emerald-100 text-emerald-700"
+                : "bg-sky-100 text-sky-700"
+            }`}
           >
-            <div className="ca-qrInner">
-              <div className="ca-qrFake">
-                <div className="ca-qrSquares" />
+            {appt.status}
+          </div>
+
+          <div className="mt-4 text-xl font-bold text-sky-500">{appt.id}</div>
+
+          <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <div className="text-xs font-semibold tracking-wide text-[#64748b]">
+                TIME WINDOW
+              </div>
+              <div className="mt-1 text-base font-bold text-[#0f172a]">
+                {appt.timeWindow}{" "}
+                <span className="text-sm font-normal text-[#64748b]">
+                  ({appt.durationMins} mins)
+                </span>
+              </div>
+            </div>
+
+            <div>
+              <div className="text-xs font-semibold tracking-wide text-[#64748b]">
+                DRIVER
+              </div>
+              <div className="mt-1 text-base font-bold text-[#0f172a]">
+                {appt.driver}
               </div>
             </div>
           </div>
 
+          <div className="mt-5 flex flex-wrap gap-2">
+            {appt.status === "CONFIRMED" ? (
+              <>
+                <button
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[#e7e9ee] bg-white text-[#0f172a] font-semibold hover:bg-gray-50 transition-colors"
+                  type="button"
+                >
+                  <PrintIcon className="w-4 h-4" />
+                  Print Pass
+                </button>
+                <button
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[#e7e9ee] bg-white text-[#0f172a] font-semibold hover:bg-gray-50 transition-colors"
+                  type="button"
+                >
+                  <DownloadIcon className="w-4 h-4" />
+                  PDF
+                </button>
+                <button
+                  className="w-9 h-9 rounded-lg border border-red-200 bg-red-50 text-red-600 font-bold hover:bg-red-100 transition-colors"
+                  type="button"
+                  title="Cancel"
+                >
+                  ✕
+                </button>
+              </>
+            ) : (
+              <button
+                className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-sky-500 text-white font-semibold hover:bg-sky-600 transition-colors"
+                type="button"
+              >
+                Pass Details
+                <LockIcon className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+        </div>
+
+        <div className="p-6 bg-gradient-to-br from-gray-50 to-gray-100 border-l border-[#e7e9ee] flex flex-col items-center justify-center">
+          <div className="text-sm font-bold text-[#0f172a] mb-2">
+            {appt.date}
+          </div>
+          <div className="text-xs font-semibold text-sky-600 mb-4">
+            {appt.gate}
+          </div>
+
+          <div
+            className={`relative w-32 h-32 rounded-xl overflow-hidden ${
+              appt.qrState === "pending" ? "blur-sm" : ""
+            }`}
+          >
+            <div className="w-full h-full bg-white border-4 border-[#0f172a] p-2">
+              <div className="w-full h-full bg-[radial-gradient(circle,#0f172a_25%,transparent_25%),radial-gradient(circle,#0f172a_25%,transparent_25%)] bg-[length:8px_8px] bg-[position:0_0,4px_4px]" />
+            </div>
+          </div>
+
           {appt.qrState === "ready" ? (
-            <div className="ca-qrHint">SCAN AT {appt.gate.toUpperCase()}</div>
+            <div className="mt-3 text-xs font-bold text-[#0f172a] tracking-wider">
+              SCAN AT {appt.gate.toUpperCase()}
+            </div>
           ) : (
-            <div className="ca-qrPill">PENDING VERIFICATION</div>
+            <div className="mt-3 px-3 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-bold">
+              PENDING VERIFICATION
+            </div>
           )}
         </div>
       </div>
@@ -263,19 +347,27 @@ const ToggleRow: React.FC<{
   onChange: (v: boolean) => void;
 }> = ({ icon, label, checked, onChange }) => {
   return (
-    <div className="ca-toggleRow">
-      <div className="ca-toggleLeft">
-        <div className="ca-rowIconWrap">{icon}</div>
-        <div className="ca-rowLabel">{label}</div>
+    <div className="flex items-center justify-between">
+      <div className="flex items-center gap-3">
+        <div className="w-9 h-9 rounded-lg bg-sky-50 flex items-center justify-center text-sky-600">
+          {icon}
+        </div>
+        <div className="text-sm font-medium text-[#0f172a]">{label}</div>
       </div>
 
       <button
-        className={`ca-switch ${checked ? "is-on" : ""}`}
+        className={`relative w-12 h-6 rounded-full transition-colors ${
+          checked ? "bg-sky-500" : "bg-gray-300"
+        }`}
         type="button"
         onClick={() => onChange(!checked)}
         aria-pressed={checked}
       >
-        <span className="ca-switchKnob" />
+        <span
+          className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow-sm transition-transform ${
+            checked ? "left-[26px]" : "left-0.5"
+          }`}
+        />
       </button>
     </div>
   );

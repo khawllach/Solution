@@ -1,6 +1,5 @@
 // src/components/Steps/VerticalSteps.tsx
 import React from "react";
-import "./VerticalSteps.css";
 
 export type StepState = "active" | "idle" | "done";
 
@@ -16,36 +15,49 @@ type Props = {
 
 const VerticalSteps: React.FC<Props> = ({ steps }) => {
   return (
-    <div className="vs">
+    <div className="flex flex-col gap-0">
       {steps.map((s, idx) => (
-        <div className="vs__row" key={s.title}>
-          <div className="vs__rail">
-            <div className={`vs__dot vs__dot--${s.state}`}>
+        <div className="flex gap-4" key={s.title}>
+          <div className="flex flex-col items-center">
+            <div
+              className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all ${
+                s.state === "done"
+                  ? "bg-emerald-500/20 text-emerald-400 ring-2 ring-emerald-500/30"
+                  : s.state === "active"
+                    ? "bg-sky-500/20 text-sky-400 ring-2 ring-sky-500/30"
+                    : "bg-white/5 text-white/30 ring-1 ring-white/10"
+              }`}
+            >
               {s.state === "done" ? (
-                <CheckIcon className="vs__icon" />
+                <CheckIcon className="w-5 h-5" />
               ) : s.state === "idle" ? (
-                <UserIcon className="vs__icon" />
+                <UserIcon className="w-5 h-5" />
               ) : (
-                <BoxIcon className="vs__icon" />
+                <BoxIcon className="w-5 h-5" />
               )}
             </div>
 
             {idx !== steps.length - 1 && (
               <div
-                className={`vs__line ${
-                  s.state === "active" ? "vs__line--active" : ""
+                className={`w-0.5 flex-1 mt-2 transition-all ${
+                  s.state === "active"
+                    ? "bg-gradient-to-b from-sky-500/50 to-white/10"
+                    : "bg-white/10"
                 }`}
+                style={{ minHeight: "40px" }}
               />
             )}
           </div>
 
-          <div className="vs__text">
+          <div className="flex-1 pb-8">
             <div
-              className={`vs__title ${s.state === "active" ? "is-active" : ""}`}
+              className={`text-base font-semibold transition-colors ${
+                s.state === "active" ? "text-white" : "text-white/60"
+              }`}
             >
               {s.title}
             </div>
-            <div className="vs__subtitle">{s.subtitle}</div>
+            <div className="text-sm text-white/40 mt-1">{s.subtitle}</div>
           </div>
         </div>
       ))}

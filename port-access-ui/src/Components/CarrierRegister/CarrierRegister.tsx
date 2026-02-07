@@ -1,6 +1,5 @@
 // src/components/Auth/CarrierRegister.tsx
 import React, { useState } from "react";
-import "./CarrierRegister.css";
 
 const CarrierRegister: React.FC = () => {
   const [company, setCompany] = useState("Logistics Inc.");

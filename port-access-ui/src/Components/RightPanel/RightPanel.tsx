@@ -1,5 +1,4 @@
 import React from "react";
-import "./RightPanel.css";
 import EventsAlerts from "./EventsAlerts.tsx";
 import AIAssistant from "./AIAssistant.tsx";
 

@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from "react";
-import "./NewPickupDriverStep.css";
 import Topbar from "../Layouts/Topbar";
 
 type StepState = "done" | "active" | "idle";

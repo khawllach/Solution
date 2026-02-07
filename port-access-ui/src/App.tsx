@@ -6,7 +6,7 @@ import Appointments from "./Components/Appointment/ConfirmedAppointments";
 
 function App() {
   return (
-    <div>
+    <div className="min-h-screen">
       <BrowserRouter>
         <Topbar />
 

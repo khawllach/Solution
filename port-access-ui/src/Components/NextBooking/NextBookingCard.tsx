@@ -1,5 +1,4 @@
 import React from "react";
-import "./NextBookingCard.css";
 
 type NextBooking = {
   status: "Confirmed" | "Pending";
