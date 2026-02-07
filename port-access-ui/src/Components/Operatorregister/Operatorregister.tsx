@@ -1,37 +1,46 @@
 // src/components/Auth/OperatorRegister.tsx
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const OperatorRegister: React.FC = () => {
-  // ✅ Operator form fields
-  const [name, setName] = useState("John Operator");
-  const [email, setEmail] = useState("operator@company.com");
-  const [phone, setPhone] = useState("+1 (555) 000-0000");
-  const [password, setPassword] = useState("password");
+  const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    navigate("/operator/dashboard");
+  };
 
   return (
-    <div className="cr-page">
+    <div className="min-h-screen bg-[#070b14] flex flex-col lg:flex-row">
       {/* Left form panel */}
-      <section className="cr-left">
-        <div className="cr-leftInner">
-          <div className="cr-brand">
-            <div className="cr-brandIcon">
-              <TruckMini className="cr-brandSvg" />
+      <section className="flex-1 flex items-center justify-center p-6 lg:p-12">
+        <div className="w-full max-w-md">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-lg">
+              <TruckMini className="w-7 h-7 text-white" />
             </div>
-            <div className="cr-brandText">Operator Portal</div>
+            <div className="text-xl font-bold text-white">Operator Portal</div>
           </div>
 
-          <h1 className="cr-title">Join the Operator Portal</h1>
-          <p className="cr-subtitle">
+          <h1 className="text-3xl md:text-4xl font-black text-white mb-3">
+            Join the Operator Portal
+          </h1>
+          <p className="text-white/60 mb-8">
             Create your operator account to monitor yard activity and manage
             gate operations.
           </p>
 
-          <form className="cr-form" onSubmit={(e) => e.preventDefault()}>
+          <form className="space-y-5" onSubmit={handleSubmit}>
             <Field
               label="Full Name"
               value={name}
               placeholder="John Operator"
               onChange={setName}
+              required
             />
 
             <Field
@@ -39,6 +48,8 @@ const OperatorRegister: React.FC = () => {
               value={email}
               placeholder="operator@company.com"
               onChange={setEmail}
+              type="email"
+              required
             />
 
             <Field
@@ -46,7 +57,8 @@ const OperatorRegister: React.FC = () => {
               value={phone}
               placeholder="+1 (555) 000-0000"
               onChange={setPhone}
-              leftIcon={<PhoneIcon className="cr-inputIcon" />}
+              leftIcon={<PhoneIcon className="w-5 h-5" />}
+              required
             />
 
             <Field
@@ -55,60 +67,83 @@ const OperatorRegister: React.FC = () => {
               placeholder="••••••••"
               onChange={setPassword}
               type="password"
-              leftIcon={<LockIcon className="cr-inputIcon" />}
+              leftIcon={<LockIcon className="w-5 h-5" />}
+              required
             />
 
-            <button className="cr-btn" type="submit">
+            <button
+              className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-semibold hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-emerald-500/25"
+              type="submit"
+            >
               Create Account
             </button>
 
-            <div className="cr-bottomText">
+            <div className="text-center text-sm text-white/60">
               Already have an account?{" "}
-              <a className="cr-link" href="#">
+              <button
+                type="button"
+                onClick={() => navigate("/")}
+                className="text-emerald-400 hover:text-emerald-300 transition-colors"
+              >
                 Back to Login
-              </a>
+              </button>
             </div>
           </form>
 
-          <div className="cr-help">
-            <span className="cr-helpDot" aria-hidden="true" />
-            <span className="cr-helpText">NEED HELP? CONTACT SUPPORT</span>
+          <div className="mt-8 flex items-center gap-2 text-xs text-white/40">
+            <span
+              className="w-2 h-2 rounded-full bg-emerald-500"
+              aria-hidden="true"
+            />
+            <span>NEED HELP? CONTACT SUPPORT</span>
           </div>
         </div>
       </section>
 
       {/* Right hero panel (same design) */}
-      <section className="cr-right">
-        <div className="cr-heroOverlay" />
+      <section className="hidden lg:flex flex-1 relative bg-gradient-to-br from-emerald-900/20 to-emerald-950/20 items-center justify-center p-12 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(16,185,129,0.1),transparent_50%)]" />
 
-        <div className="cr-rings" aria-hidden="true">
-          <span />
-          <span />
-          <span />
+        {/* Animated rings */}
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+          aria-hidden="true"
+        >
+          <span className="absolute w-64 h-64 rounded-full border border-emerald-500/10 animate-pulse" />
+          <span
+            className="absolute w-96 h-96 rounded-full border border-emerald-500/5 animate-pulse"
+            style={{ animationDelay: "1s" }}
+          />
+          <span
+            className="absolute w-[32rem] h-[32rem] rounded-full border border-emerald-500/5 animate-pulse"
+            style={{ animationDelay: "2s" }}
+          />
         </div>
 
-        <div className="cr-hero">
-          <div className="cr-pill">OPERATIONS INSIGHT</div>
+        <div className="relative z-10 max-w-lg text-center">
+          <div className="inline-block px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-semibold mb-6">
+            OPERATIONS INSIGHT
+          </div>
 
-          <h2 className="cr-heroTitle">
+          <h2 className="text-4xl font-black text-white mb-6 leading-tight">
             Streamlining gate operations,
             <br />
             with real-time control.
           </h2>
 
-          <p className="cr-heroDesc">
+          <p className="text-lg text-white/60 mb-8">
             Join the operator network to authorize entries faster, reduce
             congestion, and keep terminals running smoothly.
           </p>
 
-          <div className="cr-stats">
-            <div className="cr-stat">
-              <div className="cr-statValue">99.9%</div>
-              <div className="cr-statLabel">System Uptime</div>
+          <div className="flex justify-center gap-8">
+            <div className="text-center">
+              <div className="text-3xl font-black text-white mb-1">99.9%</div>
+              <div className="text-sm text-white/50">System Uptime</div>
             </div>
-            <div className="cr-stat">
-              <div className="cr-statValue">-18%</div>
-              <div className="cr-statLabel">Avg. Queue Reduction</div>
+            <div className="text-center">
+              <div className="text-3xl font-black text-white mb-1">-18%</div>
+              <div className="text-sm text-white/50">Avg. Queue Reduction</div>
             </div>
           </div>
         </div>
@@ -126,20 +161,38 @@ const Field: React.FC<{
   value: string;
   placeholder?: string;
   onChange: (v: string) => void;
-  type?: "text" | "password";
+  type?: "text" | "password" | "email";
   leftIcon?: React.ReactNode;
-}> = ({ label, value, placeholder, onChange, type = "text", leftIcon }) => {
+  required?: boolean;
+}> = ({
+  label,
+  value,
+  placeholder,
+  onChange,
+  type = "text",
+  leftIcon,
+  required = false,
+}) => {
   return (
-    <label className="cr-field">
-      <div className="cr-label">{label}</div>
-      <div className="cr-inputWrap">
-        {leftIcon ? <div className="cr-inputIconWrap">{leftIcon}</div> : null}
+    <label className="block">
+      <div className="text-xs font-semibold text-white/70 mb-2 tracking-wide">
+        {label}
+      </div>
+      <div className="relative">
+        {leftIcon && (
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40">
+            {leftIcon}
+          </div>
+        )}
         <input
-          className={`cr-input ${leftIcon ? "cr-input--withIcon" : ""}`}
+          className={`w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white outline-none transition-all placeholder:text-white/30 focus:border-emerald-500 focus:bg-white/8 ${
+            leftIcon ? "pl-11" : ""
+          }`}
           value={value}
           placeholder={placeholder}
           type={type}
           onChange={(e) => onChange(e.target.value)}
+          required={required}
         />
       </div>
     </label>
