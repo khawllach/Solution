@@ -11,6 +11,14 @@ const OperatorRegister: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Set authentication data
+    localStorage.setItem("isAuthenticated", "true");
+    localStorage.setItem("userType", "operator");
+    localStorage.setItem("userEmail", email);
+    localStorage.setItem("userName", name);
+
+    // Navigate to operator dashboard
     navigate("/operator/dashboard");
   };
 

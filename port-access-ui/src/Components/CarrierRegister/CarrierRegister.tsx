@@ -12,7 +12,14 @@ const CarrierRegister: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, you would validate and send to API
+
+    // Set authentication data
+    localStorage.setItem("isAuthenticated", "true");
+    localStorage.setItem("userType", "carrier");
+    localStorage.setItem("userEmail", email);
+    localStorage.setItem("companyName", company);
+
+    // Navigate to carrier dashboard
     navigate("/carrier/dashboard");
   };
 

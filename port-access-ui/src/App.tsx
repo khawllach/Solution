@@ -3,18 +3,22 @@ import Topbar from "./Components/Layouts/Topbar";
 import CarrierDashboard from "./Components/CarrierDashboard/CarrierDashboard";
 import NewPickupRequest from "./Components/NewPickupRequest/NewPickupRequest";
 import Appointments from "./Components/Appointment/ConfirmedAppointments";
-import PortalSelect from "./Components/PortalSelect/PortalSelect";
+import Login from "./Components/Auth/Login";
+import ForgotPassword from "./Components/Auth/ForgotPassword";
 import CarrierRegister from "./Components/CarrierRegister/CarrierRegister";
 import OperatorRegister from "./Components/Operatorregister/Operatorregister";
 import DashboardPage from "./Components/Dashboard/DashboardPage";
+import PendingRequestsPage from "./Components/PendingRequestsPage/PendingRequestsPage";
 
 function App() {
   return (
     <div className="min-h-screen">
       <BrowserRouter>
         <Routes>
-          {/* Portal Selection & Auth Routes (without Topbar) */}
-          <Route path="/" element={<PortalSelect />} />
+          {/* Auth Routes (without Topbar) */}
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/carrier-register" element={<CarrierRegister />} />
           <Route path="/operator-register" element={<OperatorRegister />} />
 
@@ -26,7 +30,7 @@ function App() {
                 <Topbar />
                 <Routes>
                   <Route path="dashboard" element={<CarrierDashboard />} />
-                  <Route path="pending" element={<Appointments />} />
+                  <Route path="appointments" element={<Appointments />} />
                   <Route path="control" element={<NewPickupRequest />} />
                   <Route
                     path="*"
@@ -45,6 +49,7 @@ function App() {
                 <Topbar />
                 <Routes>
                   <Route path="dashboard" element={<DashboardPage />} />
+                  <Route path="pending" element={<PendingRequestsPage />} />
                   <Route
                     path="*"
                     element={<Navigate to="/operator/dashboard" replace />}

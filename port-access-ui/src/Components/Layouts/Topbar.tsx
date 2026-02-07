@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 
 const Topbar: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+
+  useEffect(() => {
+    // Get user email from localStorage
+    const email = localStorage.getItem("userEmail");
+    setUserEmail(email);
+  }, []);
 
   // Detect portal type from current path
   const isCarrierPortal = location.pathname.startsWith("/carrier");
@@ -13,7 +21,13 @@ const Topbar: React.FC = () => {
   };
 
   const handleLogout = () => {
-    navigate("/");
+    // Clear all auth data
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("userType");
+    localStorage.removeItem("userEmail");
+
+    // Navigate to login
+    navigate("/login");
   };
 
   return (
@@ -59,9 +73,9 @@ const Topbar: React.FC = () => {
                 Dashboard
               </Link>
               <Link
-                to="/carrier/pending"
+                to="/carrier/appointments"
                 className={`text-sm pb-1.5 cursor-pointer transition-all whitespace-nowrap ${
-                  isActive("/carrier/pending")
+                  isActive("/carrier/appointments")
                     ? "text-white border-b-2 border-sky-500"
                     : "text-white/60 hover:text-white"
                 }`}
@@ -91,12 +105,16 @@ const Topbar: React.FC = () => {
               >
                 Dashboard
               </Link>
-              <a
-                href="#"
-                className="text-sm pb-1.5 cursor-pointer transition-all whitespace-nowrap text-white/60 hover:text-white"
+              <Link
+                to="/operator/pending"
+                className={`text-sm pb-1.5 cursor-pointer transition-all whitespace-nowrap ${
+                  isActive("/operator/pending")
+                    ? "text-white border-b-2 border-sky-500"
+                    : "text-white/60 hover:text-white"
+                }`}
               >
-                Gate Management
-              </a>
+                Pending Requests
+              </Link>
               <a
                 href="#"
                 className="text-sm pb-1.5 cursor-pointer transition-all whitespace-nowrap text-white/60 hover:text-white"
@@ -119,9 +137,66 @@ const Topbar: React.FC = () => {
           >
             🔔
           </button>
+
+          {/* User Profile Menu */}
+          <div className="relative">
+            <button
+              onClick={() => setShowUserMenu(!showUserMenu)}
+              className="bg-gradient-to-br from-sky-500 to-sky-600 rounded-lg w-9 h-9 flex items-center justify-center cursor-pointer text-sm font-bold transition-all text-white hover:shadow-lg hover:shadow-sky-500/30 max-md:hidden"
+              aria-label="User Menu"
+            >
+              {userEmail ? userEmail.charAt(0).toUpperCase() : "U"}
+            </button>
+
+            {showUserMenu && (
+              <div className="absolute right-0 mt-2 w-64 bg-[#121c2f] border border-white/10 rounded-xl shadow-2xl z-50 overflow-hidden">
+                <div className="p-4 border-b border-white/10">
+                  <div className="text-xs text-white/50 mb-1">Signed in as</div>
+                  <div className="text-sm font-semibold text-white truncate">
+                    {userEmail || "User"}
+                  </div>
+                  <div className="text-xs text-sky-400 mt-1">
+                    {isCarrierPortal ? "Carrier Account" : "Operator Account"}
+                  </div>
+                </div>
+                <div className="p-2">
+                  <button
+                    onClick={() => {
+                      setShowUserMenu(false);
+                      alert("Profile settings coming soon!");
+                    }}
+                    className="w-full text-left px-3 py-2 text-sm text-white/80 hover:bg-white/5 rounded-lg transition-colors"
+                  >
+                    ⚙️ Account Settings
+                  </button>
+                  <button
+                    onClick={() => {
+                      setShowUserMenu(false);
+                      alert("Help center coming soon!");
+                    }}
+                    className="w-full text-left px-3 py-2 text-sm text-white/80 hover:bg-white/5 rounded-lg transition-colors"
+                  >
+                    ❓ Help & Support
+                  </button>
+                </div>
+                <div className="p-2 border-t border-white/10">
+                  <button
+                    onClick={() => {
+                      setShowUserMenu(false);
+                      handleLogout();
+                    }}
+                    className="w-full text-left px-3 py-2 text-sm text-red-400 hover:bg-red-500/10 rounded-lg transition-colors font-semibold"
+                  >
+                    🚪 Sign Out
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+
           <button
             onClick={handleLogout}
-            className="bg-transparent border border-white/10 rounded-lg w-9 h-9 flex items-center justify-center cursor-pointer text-lg transition-all text-white/60 hover:bg-red-500/10 hover:border-red-500 hover:text-red-400"
+            className="bg-transparent border border-white/10 rounded-lg w-9 h-9 flex items-center justify-center cursor-pointer text-lg transition-all text-white/60 hover:bg-red-500/10 hover:border-red-500 hover:text-red-400 md:hidden"
             aria-label="Logout"
             title="Logout"
           >
@@ -145,9 +220,9 @@ const Topbar: React.FC = () => {
               Dashboard
             </Link>
             <Link
-              to="/carrier/pending"
+              to="/carrier/appointments"
               className={`flex-1 text-center text-xs pb-1 cursor-pointer transition-all ${
-                isActive("/carrier/pending")
+                isActive("/carrier/appointments")
                   ? "text-white border-b-2 border-sky-500"
                   : "text-white/60"
               }`}
@@ -177,12 +252,16 @@ const Topbar: React.FC = () => {
             >
               Dashboard
             </Link>
-            <a
-              href="#"
-              className="flex-1 text-center text-xs pb-1 cursor-pointer transition-all text-white/60"
+            <Link
+              to="/operator/pending"
+              className={`flex-1 text-center text-xs pb-1 cursor-pointer transition-all ${
+                isActive("/operator/pending")
+                  ? "text-white border-b-2 border-sky-500"
+                  : "text-white/60"
+              }`}
             >
-              Gates
-            </a>
+              Pending
+            </Link>
             <a
               href="#"
               className="flex-1 text-center text-xs pb-1 cursor-pointer transition-all text-white/60"
